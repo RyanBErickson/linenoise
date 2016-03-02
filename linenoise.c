@@ -827,6 +827,12 @@ static int linenoiseEdit(int stdin_fd, int stdout_fd, char *buf, size_t buflen, 
                     if (read(l.ifd,seq+2,1) == -1) break;
                     if (seq[2] == '~') {
                         switch(seq[1]) {
+                        case '1': /* Home key in screen/byobu. */
+                            linenoiseEditMoveHome(&l);
+                            break;
+                        case '4': /* End key in screen/byobu. */
+                            linenoiseEditMoveEnd(&l);
+                            break;
                         case '3': /* Delete key. */
                             linenoiseEditDelete(&l);
                             break;
